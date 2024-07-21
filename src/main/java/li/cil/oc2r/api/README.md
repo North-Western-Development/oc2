@@ -247,7 +247,7 @@ class MyCalculatorDevice {
     }
 }
 
-class ModDeviceProvider extends ForgeRegistryEntry<BlockDeviceProvider> implements BlockDeviceProvider {
+class ModDeviceProvider implements BlockDeviceProvider {
     @Override
     public Invalidatable<Device> getDevice(BlockDeviceQuery query) {
         // Note: optionally check other conditions, such as settings, on whether to just return empty().
@@ -316,7 +316,7 @@ class ModDevice implements RPCDevice {
     }
 }
 
-class ModDeviceProvider extends ForgeRegistryEntry<BlockDeviceProvider> implements BlockDeviceProvider {
+class ModDeviceProvider implements BlockDeviceProvider {
     @Override
     public Invalidatable<Device> getDevice(BlockDeviceQuery query) {
         // Note: optionally check other conditions, such as settings, on whether to just return empty().
@@ -336,16 +336,30 @@ Shared device provider registration:
 import li.cil.oc2r.api.bus.device.provider.BlockDeviceProvider;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
+import static li.cil.oc2r.api.util.Registries.BLOCK_DEVICE_PROVIDER;
 
-class Providers {
-    static final DeferredRegister<BlockDeviceProvider> BLOCK_DEVICE_PROVIDERS =
-            DeferredRegister.create(BlockDeviceProvider.class, "my_mod_id");
+public class Providers {
+    private static final DeferredRegister<BlockDeviceProvider> BLOCK_DEVICE_PROVIDERS =
+        DeferredRegister.create(BLOCK_DEVICE_PROVIDER, "your_mod_id");
 
     // Called from mod initialization, if oc2r is present.
-    static void initialize() {
-        BLOCK_DEVICE_PROVIDERS.register("my_calculator_device", ModDeviceProvider::new);
-
+    public static void initialize() {
         BLOCK_DEVICE_PROVIDERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BLOCK_DEVICE_PROVIDERS.register("my_calculator_device", ModDeviceProvider::new);
+    }
+}
+```
+
+Initialize device provider in main class:
+```java
+
+@Mod("your_mod_id")
+public class YourMod {
+    public YourMod() {
+        //...
+        if(ModList.get().isLoaded("oc2r")) {
+            Providers.initialize();
+        }
     }
 }
 ```
