@@ -80,6 +80,22 @@ public abstract class AbstractMachineTerminalScreen<T extends AbstractMachineTer
     }
 
     @Override
+    public boolean mouseClicked(final double x, final double y, final int button) {
+        if (!terminalWidget.mouseClicked(x,y,button)) {
+            return super.mouseClicked(x, y, button);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean mouseReleased(final double x, final double y, final int button) {
+        if (!terminalWidget.mouseReleased(x,y,button)) {
+            return super.mouseReleased(x, y, button);
+        }
+        return true;
+    }
+
+    @Override
     public boolean keyPressed(final int keyCode, final int scanCode, final int modifiers) {
         if (terminalWidget.keyPressed(keyCode, scanCode, modifiers)) {
             return true;
