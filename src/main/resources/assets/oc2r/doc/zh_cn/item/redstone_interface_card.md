@@ -1,8 +1,8 @@
-# 红石卡
+# 红石接口卡
 ![有信号吗？](item:oc2r:redstone_interface_card)
 
-红石卡是[红石接口](../block/redstone_interface.md)的一个更紧凑的版本。它使用户能够构建更紧凑的设计。
+红石接口卡是紧凑版本的[红石接口](../block/redstone_interface.md)。用户能用它构建更紧凑的设计。
 
-其一般功能与块版本相同。[计算机](../block/computer.md)的前面代表了红石接口块手册条目中描述的主要面。
+其一般功能与方块版本相同。[电脑](../block/computer.md)的正面对应了手册的红石接口方块条目中描述的主面。
 
-该设备的API与红石接口块的API相同。
+该设备的API与红石接口方块的API相同。
